@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2025-02-19
+  time: 2025-02-19 14:25:42
+  tenant: one
+  customer: one
+  property: one
+  user: one
+
+two:
+  date: 2025-02-19
+  time: 2025-02-19 14:25:42
+  tenant: two
+  customer: two
+  property: two
+  user: two

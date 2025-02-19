@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  has_many :properties, dependent: :destroy
+  has_many :appointments, dependent: :destroy
+
   belongs_to :tenant
 
   has_secure_password
@@ -9,7 +12,7 @@ class User < ApplicationRecord
   validates :role, presence: true, inclusion: { in: ROLES }
   validates :phone, presence: true, numericality: true, length: { is: 10 }
   validates :name, presence: true
-  validates :password, length: { minimum: 6 }, if: -> { new_record? || !password.nil? }
+  validates :password, length: { minimum: 6, maximum: 20 }
 
 
   # callbacks

@@ -63,3 +63,6 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "pry"
+gem "jwt", "~> 2.10"

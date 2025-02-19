@@ -10,7 +10,61 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_19_060451) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_19_085542) do
+  create_table "appointments", force: :cascade do |t|
+    t.date "date"
+    t.time "time"
+    t.integer "tenant_id", null: false
+    t.integer "customer_id", null: false
+    t.integer "property_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_appointments_on_customer_id"
+    t.index ["property_id"], name: "index_appointments_on_property_id"
+    t.index ["tenant_id"], name: "index_appointments_on_tenant_id"
+    t.index ["user_id"], name: "index_appointments_on_user_id"
+  end
+
+  create_table "customers", force: :cascade do |t|
+    t.string "name"
+    t.string "phoneno"
+    t.integer "tenant_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tenant_id"], name: "index_customers_on_tenant_id"
+  end
+
+  create_table "properties", force: :cascade do |t|
+    t.string "title"
+    t.string "address"
+    t.integer "price"
+    t.integer "tenant_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tenant_id"], name: "index_properties_on_tenant_id"
+    t.index ["user_id"], name: "index_properties_on_user_id"
+  end
+
+  create_table "property_tags", force: :cascade do |t|
+    t.integer "tag_id", null: false
+    t.integer "property_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["property_id", "tag_id"], name: "index_property_tags_on_property_id_and_tag_id", unique: true
+    t.index ["property_id"], name: "index_property_tags_on_property_id"
+    t.index ["tag_id"], name: "index_property_tags_on_tag_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.integer "tenant_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tenant_id"], name: "index_tags_on_tenant_id"
+  end
+
   create_table "tenants", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -29,5 +83,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_19_060451) do
     t.index ["tenant_id"], name: "index_users_on_tenant_id"
   end
 
+  add_foreign_key "appointments", "customers"
+  add_foreign_key "appointments", "properties"
+  add_foreign_key "appointments", "tenants"
+  add_foreign_key "appointments", "users"
+  add_foreign_key "customers", "tenants"
+  add_foreign_key "properties", "tenants"
+  add_foreign_key "properties", "users"
+  add_foreign_key "property_tags", "properties"
+  add_foreign_key "property_tags", "tags"
+  add_foreign_key "tags", "tenants"
   add_foreign_key "users", "tenants"
 end
