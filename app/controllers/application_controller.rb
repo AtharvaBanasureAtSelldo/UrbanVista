@@ -6,12 +6,11 @@ class ApplicationController < ActionController::Base
   before_action :authorize_request
 
   def decode_token
-    auth_header = request.headers["Authorization"]
-
+    auth_header = cookies.signed[:jwt]
     if auth_header
-      token = auth_header.split(" ").last
+      token = auth_header
       begin
-        JWT.decode(token, JWT_SECRET, true, algorithm: "HS256")
+        JWT.decode(token, "my$ecretK3", true, algorithm: "HS256")
       rescue JWT::DecodeError
         nil
       end

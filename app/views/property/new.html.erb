@@ -1,0 +1,25 @@
+<%= form_with(model: @property) do |f| %>
+  <div>
+    <%= f.label :title, "title" %>
+    <%= f.text_field :title %>
+  </div>
+  <div>
+    <%= f.label :address, "address" %>
+    <%= f.text_area :address %>
+  </div>
+  <div>
+    <%= f.label :price, "price" %>
+    <%= f.text_field :price %>  
+  </div>
+  <div>
+    <%= f.label :tenant_id, "Tenant" %>
+    <%= f.collection_select :tenant_id, Tenant.all, :id, :name, { prompt: "Select your tenant" } %>
+  </div>
+  <div>
+    <%= f.label :user_id, "User" %>
+    <%= f.collection_select :user_id, User.where(role=="agent"), :id, :name, { prompt: "Select your User" } %>
+  </div>
+  <div>
+    <%= f.submit "Create Property" %>
+  </div>
+<% end %>

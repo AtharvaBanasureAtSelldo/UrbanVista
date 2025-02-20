@@ -19,7 +19,6 @@ class User < ApplicationRecord
   before_create :set_default_role
 
   private
-
   def set_default_role
     self.role ||= "agent"
   end
