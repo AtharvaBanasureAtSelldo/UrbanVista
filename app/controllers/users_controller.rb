@@ -1,6 +1,7 @@
 require "jwt"
 class UsersController < ApplicationController
   skip_before_action :authorize_request
+  before_action :checkifuserloggedin, only: [ :new ]
 
   def new
     @user = User.new
@@ -19,9 +20,9 @@ class UsersController < ApplicationController
         httponly: true,
         expires: 24.hours.from_now
       }
-      redirect_to login_path
+      redirect_to login_path, notice: "User created Successfully"
     else
-      # render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
+      flash.now[:alert] = "User not created"
       render :new
     end
   end

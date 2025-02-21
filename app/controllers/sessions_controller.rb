@@ -3,6 +3,7 @@ require "jwt"
 class SessionsController < ApplicationController
   skip_before_action :authorize_request
   skip_before_action :verify_authenticity_token, only: [ :create ]
+  before_action :checkifuserloggedin, only: [ :new ]
 
   def new
   end
@@ -18,18 +19,15 @@ class SessionsController < ApplicationController
         httponly: true,
         expires: 24.hours.from_now
       }
-      # render json: { message: "login Successful", token: token, user: user }, status: :ok
-      redirect_to root_path
+      redirect_to root_path, notice: "Welcome back, #{user.name}!"
     else
-      # render json: { errors: "Invalid Email or password" }, status: :unauthorized
-      flash.now[:alert] = "Invalid email or password"
-      redirect_to login_path, notice: "Invalid Email or Password"
+      redirect_to login_path, alert: "Invalid Email or Password"
     end
   end
 
   def destroy
     cookies.delete(:jwt)
-    redirect_to login_path, notice: "Successfully logged out"
+    redirect_to root_path, notice: "Successfully logged out"
   end
 
   private

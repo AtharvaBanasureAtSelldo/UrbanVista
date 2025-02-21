@@ -1,45 +1,52 @@
-<h1>Sign Up</h1>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <h1 class="text-center mb-4 text-success">Sign Up</h1>
 
-<%= form_with(model: @user) do |f| %>
+      <%= form_with(model: @user, local: true, class: "border p-4 rounded shadow-sm bg-light") do |f| %>
+        <div class="form-group mb-3">
+          <%= f.label :name, "Full Name", class: "form-label text-success" %>
+          <%= f.text_field :name, class: "form-control border-success", placeholder: "Enter your name" %>
+        </div>
 
-  <div class="form-group">
-    <%= f.label :name, "Full Name" %>
-    <%= f.text_field :name, class: "form-control", placeholder: "Enter your name" %>
+        <div class="form-group mb-3">
+          <%= f.label :email, "Email Address", class: "form-label text-success" %>
+          <%= f.email_field :email, class: "form-control border-success", placeholder: "Enter your email" %>
+        </div>
+
+        <div class="form-group mb-3">
+          <%= f.label :phone, "Phone Number", class: "form-label text-success" %>
+          <%= f.text_field :phone, class: "form-control border-success", placeholder: "Enter your phone number" %>
+        </div>
+
+        <div class="form-group mb-3">
+          <%= f.label :role, "Role", class: "form-label text-success" %>
+          <%= f.select :role, User::ROLES, { prompt: "Select your role" }, class: "form-select border-success" %>
+        </div>
+
+        <div class="form-group mb-3">
+          <%= f.label :tenant_id, "Tenant", class: "form-label text-success" %>
+          <%= f.collection_select :tenant_id, Tenant.all, :id, :name, { prompt: "Select your tenant" }, class: "form-select border-success" %>
+        </div>
+
+        <div class="form-group mb-3">
+          <%= f.label :password, "Password", class: "form-label text-success" %>
+          <%= f.password_field :password, class: "form-control border-success", placeholder: "Enter your password" %>
+        </div>
+
+        <div class="form-group mb-3">
+          <%= f.label :password_confirmation, "Confirm Password", class: "form-label text-success" %>
+          <%= f.password_field :password_confirmation, class: "form-control border-success", placeholder: "Confirm your password" %>
+        </div>
+
+        <div class="d-grid">
+          <%= f.submit "Sign Up", class: "btn btn-success btn-block" %>
+        </div>
+      <% end %>
+
+      <p class="text-center mt-3">
+        Already have an account? <%= link_to 'Login', login_path, class: "text-success fw-bold" %>
+      </p>
+    </div>
   </div>
-
-  <div class="form-group">
-    <%= f.label :email, "Email Address" %>
-    <%= f.email_field :email, class: "form-control", placeholder: "Enter your email" %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :phone, "Phone Number" %>
-    <%= f.text_field :phone, class: "form-control", placeholder: "Enter your phone number" %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :role, "Role" %>
-    <%= f.select :role, User::ROLES, { prompt: "Select your role" }, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :tenant_id, "Tenant" %>
-    <%= f.collection_select :tenant_id, Tenant.all, :id, :name, { prompt: "Select your tenant" }, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :password, "Password" %>
-    <%= f.password_field :password, class: "form-control", placeholder: "Enter your password" %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :password_confirmation, "Confirm Password" %>
-    <%= f.password_field :password_confirmation, class: "form-control", placeholder: "Confirm your password" %>
-  </div>
-
-  <div class="form-group">
-    <%= f.submit "Sign Up", class: "btn btn-success" %>
-  </div>
-<% end %>
-
-<p>Already have an account? <%= link_to 'Login', login_path %></p>
+</div>

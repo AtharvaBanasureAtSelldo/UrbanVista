@@ -1,9 +1,18 @@
 class ApplicationController < ActionController::Base
+  add_flash_types :danger, :info, :warning, :success, :messages
   protect_from_forgery with: :null_session
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern
 
   before_action :authorize_request
+
+  helper_method :current_user
+
+  def checkifuserloggedin
+    if current_user
+      redirect_to root_path, alert: "You are already logged in."
+    end
+  end
 
   def decode_token
     auth_header = cookies.signed[:jwt]
@@ -25,6 +34,10 @@ class ApplicationController < ActionController::Base
       user_id = decoded_token[0]["user_id"]
       @current_user ||= User.find_by(id: user_id)
     end
+  end
+
+  def not_found
+    render file: "#{Rails.root}/public/404.html", layout: false, status: 404
   end
 
 
