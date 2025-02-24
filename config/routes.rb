@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "properties#defaultpage"
   get "error/index"
-
+  
   resources :users
   resources :properties
 

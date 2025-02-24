@@ -3,7 +3,7 @@
     <div class="col-md-8">
       <div class="card shadow-sm">
         <div class="card-header bg-success text-white">
-          <h4 class="mb-0">Create Property</h4>
+          <h4 class="mb-0"><%= @property.new_record? ? "Create Property" : "Edit Property" %></h4>
         </div>
         <div class="card-body">
           <% if @property.errors.any? %>
@@ -67,7 +67,7 @@
 
             <!-- Submit Button -->
             <div class="text-end">
-              <%= f.submit "Create Property", class: "btn btn-success px-5" %>
+              <%= f.submit "Save Property", class: "btn btn-success px-5" %>
             </div>
           <% end %>
         </div>

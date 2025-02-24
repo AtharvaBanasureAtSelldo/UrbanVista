@@ -22,7 +22,7 @@ class UsersController < ApplicationController
       }
       redirect_to login_path, notice: "User created Successfully"
     else
-      flash.now[:alert] = "User not created"
+      flash.now[:alert] = "#{@user.errors.full_messages[0]}"
       render :new
     end
   end

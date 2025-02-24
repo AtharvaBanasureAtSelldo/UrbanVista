@@ -66,3 +66,5 @@ end
 
 gem "pry"
 gem "jwt", "~> 2.10"
+
+gem "kaminari", "~> 1.2"
