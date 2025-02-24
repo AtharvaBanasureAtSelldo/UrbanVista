@@ -1,1 +1,1 @@
-JWT_SECRET = ENV['JWT_SECRET'] || "my$ecretK3"
+JWT_SECRET = ENV["JWT_SECRET"] || "my$ecretK3"

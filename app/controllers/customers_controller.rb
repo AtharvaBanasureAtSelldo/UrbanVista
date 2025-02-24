@@ -1,10 +1,10 @@
 class CustomersController < ApplicationController
   def index
-    @customers = Customer.all  
+    @customers = Customer.all
   end
 
   def new
-    @customer = Customer.new  
+    @customer = Customer.new
   end
 
   def create
@@ -13,7 +13,7 @@ class CustomersController < ApplicationController
       redirect_to customers_path
     else
       render :new
-    end  
+    end
   end
 
   private

@@ -12,7 +12,7 @@
               <ul class="mb-0">
                 <% @property.errors.full_messages.each do |message| %>
                   <li><%= message %></li>
-                <% end %>
+                <% end %> 
               </ul>
             </div>
           <% end %>
@@ -45,12 +45,12 @@
             </div>
 
             <!-- User -->
-            <div class="mb-3">
+            <!-- <div class="mb-3">
               <%= f.label :user_id, "Agent", class: "form-label" %>
               <%= f.collection_select :user_id, User.where(role: "agent"), :id, :name, 
                   { prompt: "Select your Agent" }, 
                   { class: "form-select", required: true } %>
-            </div>
+            </div> -->
 
             <!-- Tags -->
             <div class="mb-3">

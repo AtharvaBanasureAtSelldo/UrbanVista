@@ -1,4 +1,8 @@
 class ApplicationController < ActionController::Base
+  include Pundit
+
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
   add_flash_types :danger, :info, :warning, :success, :messages
   protect_from_forgery with: :null_session
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
@@ -44,5 +48,11 @@ class ApplicationController < ActionController::Base
   # Restrict access to authorized users only
   def authorize_request
     render json: { errors: "Unauthorized" }, status: :unauthorized unless current_user
+  end
+
+  private
+  def user_not_authorized
+    flash[:alert] = "You are not authorized to perform this action."
+    redirect_to root_path
   end
 end

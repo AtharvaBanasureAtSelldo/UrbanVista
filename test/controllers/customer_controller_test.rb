@@ -2,7 +2,7 @@ require "test_helper"
 
 class CustomerControllerTest < ActionDispatch::IntegrationTest
   test "should get tenant:" do
-    get customer_tenant:_url
+    get customer_tenant: _url
     assert_response :success
   end
 

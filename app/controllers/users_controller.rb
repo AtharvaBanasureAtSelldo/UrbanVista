@@ -5,13 +5,14 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    # authorize @user
   end
 
   # post /signup
 
   def create
     @user = User.new(user_params)
-
+    # authorize @user
     if @user.save
       token = encode_token({ user_id: @user.id })
       # render json: { message: "User created Successfully", token: token, user: user }, status: :created
@@ -28,6 +29,10 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def set_user
+    @user = User.find(params[:id])
+  end
 
   def encode_token(payload)
     JWT.encode(payload, "my$ecretK3")

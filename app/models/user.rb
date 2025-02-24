@@ -18,6 +18,15 @@ class User < ApplicationRecord
   # callbacks
   before_create :set_default_role
 
+
+  def is_admin?
+    role == "admin"
+  end
+
+  def is_agent?
+    role == "agent"
+  end
+
   private
   def set_default_role
     self.role ||= "agent"
