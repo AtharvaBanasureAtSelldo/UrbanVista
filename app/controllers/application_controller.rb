@@ -47,7 +47,10 @@ class ApplicationController < ActionController::Base
 
   # Restrict access to authorized users only
   def authorize_request
-    render json: { errors: "Unauthorized" }, status: :unauthorized unless current_user
+    unless current_user
+      flash[:alert] = "Your session has expired. Please log in again."
+      redirect_to login_path
+    end
   end
 
   private

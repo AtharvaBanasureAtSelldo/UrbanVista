@@ -24,18 +24,18 @@ class PropertyPolicy < ApplicationPolicy
   end
 
   def show?
-    user.present && (user.is_admin? || record.user_id == user.id)
+    user.present? && (user.is_admin? || record.user_id == user.id)
   end
 
   def create?
-    user.is_admin? || user.is_agent?
+    user.present? && ( user.is_admin? || user.is_agent? )
   end
 
   def update?
-    user.present && (user.is_admin? || record.user_id == user.id)
+    user.present? && (user.is_admin? || record.user_id == user.id)
   end
 
   def destroy?
-    user.present && (user.is_admin? || record.user_id == user.id)
+    user.present? && (user.is_admin? || record.user_id == user.id)
   end
 end

@@ -1,4 +1,4 @@
 <%= turbo_frame_tag "property_form" do %>
   <%= render 'form', property: @property %>
 <% end %>
-<%= link_to 'Back', properties_path %>
+<%= link_to 'Back', properties_path, class: "btn btn-secondary mt-3" %>
