@@ -1,44 +1,50 @@
 <div class="container mt-5">
-  <h2 class="text-center text-success mb-4">All Properties</h2>
-
-  <div class="table-responsive shadow-sm rounded">
-    <table class="table table-striped align-middle">
-      <thead class="table-success">
-        <tr>
-          <th>Title</th>
-          <th>Address</th>
-          <th>Price</th>
-          <th class="text-center">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @properties.each do |property| %>
-          <tr>
-            <td><%= property.title %></td>
-            <td><%= property.address %></td>
-            <td><%= number_to_currency(property.price, unit: "Rs ", precision: 0) %></td>
-            <td class="text-center">
-              <div class="d-flex justify-content-center gap-2">
-                <%= link_to property_path(property), class: "btn btn-primary btn-sm me-1", title: "View" do %>
-                  <i class="fas fa-eye"></i>
-                <% end %>
-
-                <%= link_to edit_property_path(property), class: "btn btn-warning btn-sm me-1", title: "Edit" do %>
-                  <i class="fas fa-edit"></i>
-                <% end %>
-
-                <%= button_to property_path(property), method: :delete, class: "btn btn-danger btn-sm me-1", title: "Delete" do %>
-                  <i class="fas fa-trash"></i>
-                <% end %>
-              </div>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+  <div class="text-center mb-4">
+    <h2 class="text-success fw-bold">All Properties</h2>
   </div>
 
-  <div class="text-center mt-3">
-    <%= link_to 'New Property', new_property_path, class: "btn btn-success px-4" %>
+  <div class="d-flex justify-content-center mb-3">
+    <%= link_to 'New Property', new_property_path, class: "btn btn-success px-4 py-2 fw-semibold shadow-sm" %>
+  </div>
+
+  <div class="card shadow-sm rounded">
+    <div class="card-body p-4">
+      <div class="table-responsive">
+        <table class="table table-striped align-middle table-hover">
+          <thead class="table-success text-center">
+            <tr>
+              <th class="p-3">Title</th>
+              <th class="p-3">Address</th>
+              <th class="p-3">Price</th>
+              <th class="p-3 text-center">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @properties.each do |property| %>
+              <tr class="text-center">
+                <td class="fw-medium"><%= property.title %></td>
+                <td><%= property.address %></td>
+                <td><%= number_to_currency(property.price, unit: "Rs ", precision: 0) %></td>
+                <td class="text-center">
+                  <div class="d-flex justify-content-center gap-2">
+                    <%= link_to property_path(property), class: "btn btn-primary btn-sm shadow-sm fw-semibold", title: "View" do %>
+                      <i class="fas fa-eye"></i> View
+                    <% end %>
+
+                    <%= link_to edit_property_path(property), class: "btn btn-warning btn-sm shadow-sm fw-semibold", title: "Edit" do %>
+                      <i class="fas fa-edit"></i> Edit
+                    <% end %>
+
+                    <%= button_to property_path(property), method: :delete, class: "btn btn-danger btn-sm shadow-sm fw-semibold", title: "Delete" do %>
+                      <i class="fas fa-trash"></i> Delete
+                    <% end %>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </div>

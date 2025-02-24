@@ -10,8 +10,8 @@ class PropertiesController < ApplicationController
 
   def destroy
     @property = Property.find(params[:id])
-    @property.appointments.destroy_all 
-
+    #TODO : Fix any foreign key constraints dependency 
+    @property.appointments.destroy_all
     @property.user_id=nil
     @property.tenant_id=nil
     @property.destroy
@@ -36,7 +36,7 @@ class PropertiesController < ApplicationController
   def create
     @property = Property.new(property_params)
     if @property.save
-      redirect_to root_path
+      redirect_to properties_path
     else
       render :new
     end
@@ -50,7 +50,7 @@ class PropertiesController < ApplicationController
   def update
     @property = Property.find(params[:id])
     if @property.update(property_params)
-      redirect_to @property, notice: "Property updated Successfully"
+      redirect_to properties_path, notice: "Property updated Successfully"
     else
       render turbo_stream: turbo_stream.replace(
         "property_form",
