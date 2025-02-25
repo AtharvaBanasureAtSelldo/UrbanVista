@@ -17,7 +17,7 @@
             </div>
           <% end %>
 
-          <%= form_with(model: @property, local: true, html: { class: "property-form", novalidate: true  }) do |f| %>
+          <%= form_with(model: @property, url: properties_path, data: { turbo: false }, html: { class: "property-form" }) do |f| %>
             <!-- Title -->
             <div class="mb-3">
               <%= f.label :title, "Title", class: "form-label" %>
@@ -41,7 +41,7 @@
               <%= f.label :tenant_id, "Tenant", class: "form-label" %>
               <%= f.collection_select :tenant_id, Tenant.all, :id, :name, 
                   { prompt: "Select your tenant" }, 
-                  { class: "form-select", required: true }%>
+                  { class: "form-select", required: true} %>
             </div>
 
             <!-- User -->

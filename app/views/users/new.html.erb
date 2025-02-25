@@ -6,37 +6,37 @@
       <%= form_with(model: @user, local: true, class: "border p-4 rounded shadow-sm bg-light") do |f| %>
         <div class="form-group mb-3">
           <%= f.label :name, "Full Name", class: "form-label text-success" %>
-          <%= f.text_field :name, class: "form-control border-success", placeholder: "Enter your name" %>
+          <%= f.text_field :name, class: "form-control border-success", placeholder: "Enter your name", required: true %>
         </div>
 
         <div class="form-group mb-3">
           <%= f.label :email, "Email Address", class: "form-label text-success" %>
-          <%= f.email_field :email, class: "form-control border-success", placeholder: "Enter your email" %>
+          <%= f.email_field :email, class: "form-control border-success", placeholder: "Enter your email", required: true %>
         </div>
 
         <div class="form-group mb-3">
           <%= f.label :phone, "Phone Number", class: "form-label text-success" %>
-          <%= f.text_field :phone, class: "form-control border-success", placeholder: "Enter your phone number" %>
+          <%= f.text_field :phone, class: "form-control border-success", placeholder: "Enter your phone number", required: true %>
         </div>
 
         <div class="form-group mb-3">
           <%= f.label :role, "Role", class: "form-label text-success" %>
-          <%= f.select :role, User::ROLES, { prompt: "Select your role" }, class: "form-select border-success" %>
+          <%= f.select :role, User::ROLES, { prompt: "Select your role" }, class: "form-select border-success", required: true %>
         </div>
 
         <div class="form-group mb-3">
           <%= f.label :tenant_id, "Tenant", class: "form-label text-success" %>
-          <%= f.collection_select :tenant_id, Tenant.all, :id, :name, { prompt: "Select your tenant" }, class: "form-select border-success" %>
+          <%= f.collection_select :tenant_id, Tenant.all, :id, :name, { prompt: "Select your tenant" }, class: "form-select border-success", required: true %>
         </div>
 
         <div class="form-group mb-3">
           <%= f.label :password, "Password", class: "form-label text-success" %>
-          <%= f.password_field :password, class: "form-control border-success", placeholder: "Enter your password" %>
+          <%= f.password_field :password, class: "form-control border-success", placeholder: "Enter your password", required: true %>
         </div>
 
         <div class="form-group mb-3">
           <%= f.label :password_confirmation, "Confirm Password", class: "form-label text-success" %>
-          <%= f.password_field :password_confirmation, class: "form-control border-success", placeholder: "Confirm your password" %>
+          <%= f.password_field :password_confirmation, class: "form-control border-success", placeholder: "Confirm your password", required: true %>
         </div>
 
         <div class="d-grid">
