@@ -30,6 +30,9 @@ class PropertiesController < ApplicationController
     elsif current_user.role == "agent"
       render layout: "agent"
     end
+
+    rescue ActiveRecord::RecordNotFound
+      redirect_to properties_path, alert: "Property not found"
   end
 
   def new
@@ -52,6 +55,8 @@ class PropertiesController < ApplicationController
     @property=Property.find(params[:id])
     @tags=Tag.all
     authorize @property
+    rescue ActiveRecord::RecordNotFound
+      redirect_to properties_path, alert: "Property not found"
   end
 
   def update
@@ -66,6 +71,9 @@ class PropertiesController < ApplicationController
         locals: { property: @property }
       ), status: :unprocessable_entity
     end
+
+    rescue ActiveRecord::RecordNotFound
+      redirect_to properties_path, alert: "Property not found"
   end
 
 

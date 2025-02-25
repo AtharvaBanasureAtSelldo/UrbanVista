@@ -13,7 +13,6 @@ Rails.application.routes.draw do
   root "properties#defaultpage"
   get "error/index"
 
-  resources :users
   resources :properties
   resources :customers
 
