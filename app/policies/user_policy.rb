@@ -33,6 +33,10 @@ class UserPolicy < ApplicationPolicy
     user.present? && user.is_admin?
   end
 
+  def createAgent?
+    user.present? && user.is_admin?
+  end
+
   class Scope < ApplicationPolicy::Scope
     # NOTE: Be explicit about which records you allow access to!
     # def resolve
