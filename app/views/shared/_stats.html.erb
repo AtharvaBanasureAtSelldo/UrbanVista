@@ -1,0 +1,44 @@
+<div class="container my-4">
+  <div class="row g-3">
+    <!-- Properties Count -->
+    <% unless properties==nil %>
+
+    <div class="col-md-4">
+      <div class="card text-center border">
+        <div class="card-body">
+          <h6 class="card-title mb-1">Properties</h6>
+          <p class="fs-5 fw-semibold mb-0"><%= properties&.count %></p> <!-- Dynamic count -->
+        </div>
+      </div>
+    </div>
+
+    <% end %>
+
+    <!-- Customer Count -->
+
+    <% unless customers==nil %>
+    <div class="col-md-4">
+      <div class="card text-center border">
+        <div class="card-body">
+          <h6 class="card-title mb-1">Customers</h6>
+          <p class="fs-5 fw-semibold mb-0"><%= customers&.count %></p> <!-- Dynamic count -->
+        </div>
+      </div>
+    </div>
+    <% end %>
+
+    <!-- Agent Count -->
+    <%
+=begin%>
+ <div class="col-md-4">
+      <div class="card text-center border">
+        <div class="card-body">
+          <h6 class="card-title mb-1">Agents</h6>
+          <p class="fs-5 fw-semibold mb-0"><%=  %></p> <!-- Dynamic count -->
+        </div>
+      </div>
+    </div> 
+<%
+=end%>
+  </div>
+</div>

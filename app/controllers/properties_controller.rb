@@ -1,12 +1,13 @@
 class PropertiesController < ApplicationController
   before_action :authorize_request, only: [ :show ]
+  before_action :set_layout
 
   def index
-    @properties = policy_scope(Property)
+    @properties = policy_scope(Property).order(created_at: :desc)
     authorize Property
-  end
-
-  def defaultpage
+    @property_count = @properties.count
+    @agent_count = User.where(role: "agent").count
+    render layout: @layout
   end
 
   def destroy
@@ -14,30 +15,24 @@ class PropertiesController < ApplicationController
     authorize @property
     # TODO : Fix any foreign key constraints dependency
     @property.appointments.destroy_all
-    @property.user_id=nil
-    @property.tenant_id=nil
+    @property.user_id = nil
+    @property.tenant_id = nil
     @property.destroy
     redirect_to properties_path, notice: "Property deleted Successfully"
   end
 
-
   def show
     @property = Property.find(params[:id])
     authorize @property
-    # TODO: Use safer way to find: find_by(id: params[:id])
-    if current_user.role == "admin"
-      render layout: "admin"
-    elsif current_user.role == "agent"
-      render layout: "agent"
-    end
-
-    rescue ActiveRecord::RecordNotFound
-      redirect_to properties_path, alert: "Property not found"
+    render layout: @layout
+  rescue ActiveRecord::RecordNotFound
+    redirect_to properties_path, alert: "Property not found"
   end
 
   def new
     @property = Property.new
     authorize @property
+    render layout: @layout
   end
 
   def create
@@ -52,11 +47,13 @@ class PropertiesController < ApplicationController
   end
 
   def edit
-    @property=Property.find(params[:id])
-    @tags=Tag.all
+    @property = Property.find(params[:id])
+    @tags = Tag.all
     authorize @property
-    rescue ActiveRecord::RecordNotFound
-      redirect_to properties_path, alert: "Property not found"
+
+    render layout: @layout
+  rescue ActiveRecord::RecordNotFound
+    redirect_to properties_path, alert: "Property not found"
   end
 
   def update
@@ -71,13 +68,20 @@ class PropertiesController < ApplicationController
         locals: { property: @property }
       ), status: :unprocessable_entity
     end
-
-    rescue ActiveRecord::RecordNotFound
-      redirect_to properties_path, alert: "Property not found"
+  rescue ActiveRecord::RecordNotFound
+    redirect_to properties_path, alert: "Property not found"
   end
 
+  def displayagent
+    @agents = User.where(role: "agent")
+  end
 
   private
+
+  def set_layout
+    @layout = current_user.role == "admin" ? "admin" : "agent"
+  end
+
   def property_params
     params.require(:property).permit(:title, :address, :price, :tenant_id).merge(user_id: current_user.id)
   end

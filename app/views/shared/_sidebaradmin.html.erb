@@ -1,0 +1,62 @@
+<!-- Admin Sidebar -->
+<div class="d-flex flex-column py-3">
+  <!-- Admin Profile -->
+  <div class="d-flex align-items-center mb-4 px-2">
+    <div class="d-flex justify-content-center align-items-center me-3 rounded-circle bg-light" style="width: 50px; height: 50px;">
+      <img src="<%= asset_path('admin.png') %>" alt="Admin" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;">
+    </div>
+    <span class="fw-bold fs-5 text-success">Admin</span>
+  </div>
+
+  <!-- Navigation Links -->
+  <div class="nav flex-column nav-pills">
+    <%= link_to "/", class: "nav-link #{'bg-success text-white' if controller_name == 'pages'} text-success" do %>
+      <div class="d-flex align-items-center">
+        <i class="fas fa-home me-2"></i>
+        <p class="m-0">Home</p>
+      </div>
+    <% end %>
+
+    <%
+=begin%>
+ <%= link_to properties_path, class: "nav-link #{'bg-success text-white' if controller_name == 'dashboard'} text-success" do %>
+      <div class="d-flex align-items-center">
+        <i class="fas fa-tachometer-alt me-2"></i>
+        <p class="m-0">Dashboard</p>
+      </div>
+    <% end %> 
+<%
+=end%>
+
+    <%= link_to properties_path, class: "nav-link #{'bg-success text-white' if controller_name == 'properties'} text-success" do %>
+      <div class="d-flex align-items-center">
+        <i class="fas fa-box me-2"></i>
+        <p class="m-0">Properties</p>
+      </div>
+    <% end %>
+
+    <%= link_to customers_path, class: "nav-link #{'bg-success text-white' if controller_name == 'customers'} text-success" do %>
+      <div class="d-flex align-items-center">
+        <i class="fas fa-users me-2"></i>
+        <p class="m-0">Customers</p>
+      </div>
+    <% end %>
+
+    <%= link_to properties_path, class: "nav-link #{'bg-success text-white' if controller_name == 'agents'} text-success" do %>
+      <div class="d-flex align-items-center">
+        <i class="fas fa-user-tie me-2"></i>
+        <p class="m-0">Agent</p>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Additional functionality can be added here -->
+  <div class="mt-auto pt-4 border-top">
+    <%= link_to "/logout", method: :delete, class: "nav-link text-danger" do %>
+      <div class="d-flex align-items-center">
+        <i class="fas fa-sign-out-alt me-2"></i>
+        <p class="m-0">Logout</p>
+      </div>
+    <% end %>
+  </div>
+</div>

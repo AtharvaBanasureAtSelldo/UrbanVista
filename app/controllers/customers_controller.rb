@@ -1,6 +1,8 @@
 class CustomersController < ApplicationController
+  layout "admin"
   def index
     @customers = Customer.all
+    @curtomer_count = @customers.count
   end
 
   def new

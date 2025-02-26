@@ -44,7 +44,6 @@ class ApplicationController < ActionController::Base
     render file: "#{Rails.root}/public/404.html", layout: false, status: 404
   end
 
-
   # Restrict access to authorized users only
   def authorize_request
     unless current_user
@@ -58,4 +57,6 @@ class ApplicationController < ActionController::Base
     flash[:alert] = "You are not authorized to perform this action."
     redirect_to root_path
   end
+
+
 end
