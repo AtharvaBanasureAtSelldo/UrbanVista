@@ -48,6 +48,13 @@
         <p class="m-0">Agent</p>
       </div>
     <% end %>
+
+    <%= link_to appointments_path, class: "nav-link #{'bg-success text-white' if controller_name == "appointments"} text-success" do %>
+    <div class="d-flex align-items-center">
+      <i class="fas fa-users me-2"></i>
+      <p class="m-0">Appointments</p>
+    </div>
+  <% end %>
   </div>
 
   <!-- Additional functionality can be added here -->

@@ -1,0 +1,47 @@
+<div class="container my-4">
+  <div class="text-center mb-4">
+    <h2 class="text-success fw-bold">New Appointment</h2>
+  </div>
+
+  <div class="card shadow-sm rounded">
+    <div class="card-body p-4">
+      <%= form_with(model: @appointment, local: true) do |form| %>
+        <div class="mb-3">
+          <%= form.label :user_id, "Agent", class: "form-label fw-semibold" %>
+          <%= form.collection_select :user_id, User.where(role: "agent"), :id, :name, 
+            { prompt: "Select an agent" }, class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :customer_id, "Customer", class: "form-label fw-semibold" %>
+          <%= form.collection_select :customer_id, Customer.all, :id, :name, 
+            { prompt: "Select a customer" }, class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :property_id, "Property", class: "form-label fw-semibold" %>
+          <%= form.collection_select :property_id, Property.all, :id, :title, 
+            { prompt: "Select a property" }, class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :date, "Date", class: "form-label fw-semibold" %>
+          <%= form.date_field :date, class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :time, "Time", class: "form-label fw-semibold" %>
+          <%= form.time_field :time, class: "form-control" %>
+        </div>
+
+        <div class="mb-3 text-center">
+          <%= form.submit "Create Appointment", class: "btn btn-success px-4 py-2 fw-semibold" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="text-center mt-3">
+    <%= link_to "Back to Appointments", appointments_path, class: "btn btn-secondary" %>
+  </div>
+</div>

@@ -38,5 +38,17 @@
       </div>
     </div> 
     <% end %>
+
+    <!-- Appointment Count -->
+    <% unless appointments==nil %>
+    <div class="col-md-4">
+      <div class="card text-center border">
+        <div class="card-body">
+          <h6 class="card-title mb-1">Appointments</h6>
+          <p class="fs-5 fw-semibold mb-0"><%= appointments&.count %></p> <!-- Dynamic count -->
+        </div>
+      </div>
+    </div> 
+    <% end %>
   </div>
 </div>

@@ -4,7 +4,7 @@ class AppointmentPolicy < ApplicationPolicy
       if user.is_admin?
         scope.all
       else
-        scope.where(agent_id: user.id).or(scope.where(customer_id: user.id))
+        scope.where(user_id: user.id).or(scope.where(customer_id: user.id))
       end
     end
   end
@@ -14,7 +14,7 @@ class AppointmentPolicy < ApplicationPolicy
   end
 
   def show?
-    user.is_admin? || record.agent_id == user.id || record.customer_id == user.id
+    user.is_admin? || record.user_id == user.id || record.customer_id == user.id
   end
 
   def create?
@@ -22,7 +22,7 @@ class AppointmentPolicy < ApplicationPolicy
   end
 
   def update?
-    user.is_admin? || record.agent_id == user.id
+    user.is_admin? || record.user_id == user.id
   end
 
   def destroy?

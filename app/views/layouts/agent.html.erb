@@ -74,9 +74,9 @@
   <div class="main-content">
     <!-- Fixed Stats Section -->
 
-    <% unless ["/customers/new", "properties/new", "/"].include?(request.original_fullpath) %>
+    <% unless ["/customers/new", "properties/new", "/", "appointments/new"].include?(request.original_fullpath) %>
       <div class="stats-section">
-        <%= render "shared/stats", customers: @customers, properties:@properties, agents:@agents %>
+        <%= render "shared/stats", customers: @customers, properties:@properties, agents:@agents, appointments:@appointments %>
       </div>
     <% end %>
 

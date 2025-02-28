@@ -23,17 +23,41 @@
       <% @appointments.each_with_index do |appointment, index| %>
         <tr>
           <td><%= index + 1 %></td>
-          <td><%= appointment.agent.name %></td>
-          <td><%= appointment.customer.name %></td>
-          <td><%= appointment.property.title %></td>
+          <td><%= User.find(appointment.user_id).name %></td>
+          <td><%= Customer.find(appointment.customer_id).name %></td>
+          <td><%= Property.find(appointment.property_id).title %></td>
           <td><%= appointment.date.strftime("%d %b %Y") %></td>
           <td><%= appointment.time.strftime("%I:%M %p") %></td>
-          <td>
-            <%= link_to 'Edit', edit_appointment_path(appointment), class: "btn btn-sm btn-primary" %>
-            <%= link_to 'Delete', appointment, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-danger" %>
+          <td class="d-flex gap-2">
+            <%= link_to edit_appointment_path(appointment), class: "btn btn-outline-warning btn-sm shadow-sm fw-semibold px-3", title: "Edit" do %>
+              <i class="fas fa-edit"></i> Edit
+            <% end %>
+
+            <%= link_to "#", method: :delete, data: { bs_toggle: "modal", bs_target: "#deleteModal", appointment_id: appointment.id }, class: "btn btn-outline-danger btn-sm shadow-sm fw-semibold px-3", title: "Delete" do %>
+              <i class="fas fa-trash"></i> Delete
+            <% end %>
           </td>
         </tr>
       <% end %>
     </tbody>
   </table>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger">Confirm Deletion</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete this appointment?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <%= button_to "Delete", "#", method: :delete, class: "btn btn-danger", id: "confirmDeleteButton" %>
+      </div>
+    </div>
+  </div>
 </div>
