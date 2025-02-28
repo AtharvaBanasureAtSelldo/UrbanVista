@@ -1,0 +1,10 @@
+<div class="container">
+  <h2>Appointment Details</h2>
+  <p><strong>Agent:</strong> <%= @appointment.agent.name %></p>
+  <p><strong>Customer:</strong> <%= @appointment.customer.name %></p>
+  <p><strong>Property:</strong> <%= @appointment.property.title %></p>
+  <p><strong>Date:</strong> <%= @appointment.date.strftime("%d %b %Y") %></p>
+  <p><strong>Time:</strong> <%= @appointment.time.strftime("%I:%M %p") %></p>
+
+  <%= link_to 'Back', appointments_path, class: "btn btn-secondary" %>
+</div>

@@ -2,6 +2,10 @@ class User < ApplicationRecord
   has_many :properties, dependent: :destroy
   has_many :appointments, dependent: :destroy
 
+  has_many :appointments_as_agent, class_name: "Appointment", foreign_key: "agent_id"
+  has_many :appointments_as_customer, class_name: "Appointment", foreign_key: "customer_id"
+  has_many :appointments_as_tenant, class_name: "Appointment", foreign_key: "tenant_id"
+
   belongs_to :tenant
 
   has_secure_password

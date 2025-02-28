@@ -27,6 +27,7 @@ class UsersController < ApplicationController
       render :new
     end
   end
+  
 
   private
 
@@ -39,6 +40,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
+    # TODO :Remove tenant_id from all the forms etc.
     params.require(:user).permit(:name, :email, :role, :phone, :tenant_id, :password, :password_confirmation)
   end
 end

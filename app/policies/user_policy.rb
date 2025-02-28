@@ -38,9 +38,12 @@ class UserPolicy < ApplicationPolicy
   end
 
   class Scope < ApplicationPolicy::Scope
-    # NOTE: Be explicit about which records you allow access to!
-    # def resolve
-    #   scope.all
-    # end
+    def resolve
+      if user.is_admin?
+        scope.all
+      else
+        scope.where(role: "agent")
+      end
+    end
   end
 end

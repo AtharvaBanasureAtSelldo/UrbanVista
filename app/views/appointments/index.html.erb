@@ -1,0 +1,39 @@
+<div class="container my-4">
+  <div class="text-center mb-4">
+    <h2 class="text-success fw-bold">Appointments</h2>
+  </div>
+
+  <div class="d-flex justify-content-end mb-3">
+    <%= link_to 'New Appointment', new_appointment_path, class: "btn btn-success px-4 py-2 fw-semibold shadow-sm" %>
+  </div>
+
+  <table class="table table-bordered table-striped">
+    <thead class="table-light">
+      <tr>
+        <th>#</th>
+        <th>Agent</th>
+        <th>Customer</th>
+        <th>Property</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @appointments.each_with_index do |appointment, index| %>
+        <tr>
+          <td><%= index + 1 %></td>
+          <td><%= appointment.agent.name %></td>
+          <td><%= appointment.customer.name %></td>
+          <td><%= appointment.property.title %></td>
+          <td><%= appointment.date.strftime("%d %b %Y") %></td>
+          <td><%= appointment.time.strftime("%I:%M %p") %></td>
+          <td>
+            <%= link_to 'Edit', edit_appointment_path(appointment), class: "btn btn-sm btn-primary" %>
+            <%= link_to 'Delete', appointment, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-danger" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

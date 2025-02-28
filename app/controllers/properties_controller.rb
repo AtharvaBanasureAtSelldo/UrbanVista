@@ -72,10 +72,6 @@ class PropertiesController < ApplicationController
     redirect_to properties_path, alert: "Property not found"
   end
 
-  def displayagent
-    @agents = User.where(role: "agent")
-  end
-
   private
 
   def set_layout

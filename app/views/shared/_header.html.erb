@@ -30,17 +30,27 @@
                 Customers
               </a>
             </li>
+            <% if current_user.role== "admin"%>
+            <li>
+              <a href="/agents" class="nav-link text-white">
+                <i class="fas fa-user-tie"></i> <!-- Agent Icon -->
+                Agents
+              </a>
+            </li>
+            <% end %>
           </ul>
         <% end %>
         <!-- Login & Sign-up Buttons -->
         <div>
           <% if current_user %>
             <!-- Show Logout if user is logged in -->
-            <%= link_to "Logout", logout_path, method: :delete, class: "btn btn-success text-white" %>
+            <div>
+              <%= link_to "Logout", logout_path, method: :delete, class: "btn btn-success text-white" %>
+            </div>
           <% else %>
             <!-- Show Login & Sign-up if no user is logged in -->
             <%= link_to "Login", login_path, class: "btn btn-outline-light me-2" %>
-            <%= link_to "Sign-up", signup_path, class: "btn btn-success" %>
+            <%= link_to "Sign Up", signup_path, class: "btn btn-success" %>
           <% end %>
         </div>
       </div>

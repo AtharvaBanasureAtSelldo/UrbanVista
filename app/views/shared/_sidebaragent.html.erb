@@ -5,7 +5,7 @@
     <div class="d-flex justify-content-center align-items-center me-3 rounded-circle bg-light" style="width: 50px; height: 50px;">
       <img src="<%= asset_path('admin.png') %>" alt="Admin" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;">
     </div>
-    <span class="fw-bold fs-5 text-success">Admin</span>
+    <span class="fw-bold fs-5 text-success">Agent</span>
   </div>
 
   <!-- Navigation Links -->
@@ -39,13 +39,6 @@
       <div class="d-flex align-items-center">
         <i class="fas fa-users me-2"></i>
         <p class="m-0">Customers</p>
-      </div>
-    <% end %>
-
-    <%= link_to agents_path, class: "nav-link #{'bg-success text-white' if controller_name == "agents"} text-success" do %>
-    <div class="d-flex align-items-center">
-        <i class="fas fa-user-tie me-2"></i>
-        <p class="m-0">Agent</p>
       </div>
     <% end %>
   </div>

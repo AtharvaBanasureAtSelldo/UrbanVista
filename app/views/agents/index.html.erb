@@ -1,0 +1,28 @@
+<div class="container my-4 mt-0">
+  <div class="text-center mb-4">
+    <h2 class="text-success fw-bold">All Agents</h2>
+  </div>
+
+  <table class="table table-bordered table-striped">
+    <thead class="table-light">
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Joined Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @agents.each_with_index do |agent, index| %>
+        <tr>
+          <td><%= index + 1 %></td>
+          <td><%= agent.name %></td>
+          <td><%= agent.email %></td>
+          <td><%= agent.phone %></td>
+          <td><%= agent.created_at.strftime("%d %b %Y") %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

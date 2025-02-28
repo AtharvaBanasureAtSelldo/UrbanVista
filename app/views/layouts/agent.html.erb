@@ -3,24 +3,99 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AGENT DASHBORD</title>
+  <title>Agent Dashboard</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <style>
+    /* Style for fixed header */
+    .fixed-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+    }
+    
+    /* Style for fixed sidebar */
+    .sidebar {
+      position: fixed;
+      top: 56px; /* Match this to your header height */
+      left: 0;
+      width: 250px; /* Adjust width as needed */
+      height: calc(100vh - 56px);
+      z-index: 999;
+      overflow-y: auto;
+      background-color: #f8f9fa;
+      border-right: 1px solid #dee2e6;
+      padding: 1rem;
+    }
+    
+    /* Style for main content area */
+    .main-content {
+      margin-left: 250px; /* Match sidebar width */
+      padding-top: 56px; /* Match header height */
+    }
+    
+    /* Style for fixed stats section */
+    .stats-section {
+      position: sticky;
+      top: 56px; /* Match header height */
+      background-color: #fff;
+      padding: 1rem;
+      z-index: 998;
+      border-bottom: 1px solid #dee2e6;
+    }
+    
+    /* Style for dynamic content area */
+    .dynamic-content {
+      padding: 1rem;
+    }
+    
+    /* Body padding to account for fixed header */
+    body {
+      padding-top: 0; /* Remove padding as we handle it in the layout */
+      overflow-x: hidden; /* Prevent horizontal scrolling */
+    }
+  </style>
 </head>
 <body>
-  <!-- Header -->
-  <%= render "shared/header" %>
+  <!-- Fixed Header -->
+  <div class="fixed-header">
+    <%= render "shared/header" %>
+  </div>
   
-  <div class="container mt-3">
-    <% flash.each do |key, message| %>
-      <div class="alert <%= flash_class(key) %> alert-dismissible fade show" role="alert">
-        <%= message %>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <%= render "shared/sidebaragent" %>
+  </div>
+  
+  <!-- Main Content Area -->
+  <div class="main-content">
+    <!-- Fixed Stats Section -->
+
+    <% unless ["/customers/new", "properties/new", "/"].include?(request.original_fullpath) %>
+      <div class="stats-section">
+        <%= render "shared/stats", customers: @customers, properties:@properties, agents:@agents %>
       </div>
     <% end %>
-  </div>
 
-  <%= yield %>
+    <!-- Flash Messages -->
+    <div class="container-fluid" style="margin-top: 56px;">
+      <% flash.each do |key, message| %>
+        <div class="alert <%= flash_class(key) %> alert-dismissible fade show" role="alert">
+          <%= message %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <% end %>
+    </div>
+    
+    <!-- Dynamic Content (yield) -->
+    <div class="dynamic-content">
+      <%= yield %>
+    </div>
+  </div>
+  
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
