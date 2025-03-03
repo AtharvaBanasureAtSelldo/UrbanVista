@@ -1,6 +1,4 @@
-<!-- Admin Sidebar -->
 <div class="d-flex flex-column py-3">
-  <!-- Admin Profile -->
   <div class="d-flex align-items-center mb-4 px-2">
     <div class="d-flex justify-content-center align-items-center me-3 rounded-circle bg-light" style="width: 50px; height: 50px;">
       <img src="<%= asset_path('admin.png') %>" alt="Admin" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;">
@@ -8,7 +6,6 @@
     <span class="fw-bold fs-5 text-success">Agent</span>
   </div>
 
-  <!-- Navigation Links -->
   <div class="nav flex-column nav-pills">
     <%= link_to "/", class: "nav-link #{'bg-success text-white' if controller_name == 'pages'} text-success" do %>
       <div class="d-flex align-items-center">
@@ -50,7 +47,6 @@
     <% end %>
   </div>
 
-  <!-- Additional functionality can be added here -->
   <div class="mt-auto pt-4 border-top">
     <%= link_to "/logout", method: :delete, class: "nav-link text-danger" do %>
       <div class="d-flex align-items-center">

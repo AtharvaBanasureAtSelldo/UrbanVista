@@ -70,3 +70,8 @@ gem "jwt", "~> 2.10"
 gem "kaminari", "~> 1.2"
 
 gem "pundit"
+
+group :development, :test do
+  gem "rspec-rails"
+end
+gem "factory_bot_rails", "~> 6.4"

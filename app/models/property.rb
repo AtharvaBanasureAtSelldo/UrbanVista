@@ -1,5 +1,6 @@
 class Property < ApplicationRecord
   belongs_to :tenant
+  belongs_to :user
 
 
   has_many :appointments, dependent: :destroy
