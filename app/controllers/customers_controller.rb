@@ -1,6 +1,7 @@
 class CustomersController < ApplicationController
   before_action :set_layout
   def index
+    # @customers = Customer.where(tenant_id: current_user.id)
     @customers = Customer.all
     @curtomer_count = @customers.count
     render layout: @layout
@@ -8,7 +9,7 @@ class CustomersController < ApplicationController
 
   def new
     @customer = Customer.new
-    render layout: @layout
+  render layout: @layout
   end
 
   def create

@@ -2,7 +2,8 @@
   <div class="px-3 py-2 text-white border-bottom" style="background-color: #198754;">
     <div class="container d-flex flex-wrap align-items-center justify-content-between">
       <a href="/" class="d-flex align-items-center my-2 my-lg-0 text-white text-decoration-none">
-        <i class="fas fa-building fa-2x me-2"></i>
+        <!-- <i class="fas fa-building fa-2x me-2"></i> -->
+        <img src="/logo.png" alt="Urban Vista Logo" class="me-2" style="height: 28px; width: auto;">
         <span class="fs-4">Urban Vista <%= current_user.present? ? ( current_user.role=="admin" ? "Admin" : "Agent" ) : "" %></span>
       </a>
 

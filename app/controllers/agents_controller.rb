@@ -12,8 +12,16 @@ class AgentsController < ApplicationController
     render layout: @layout
   end
 
+  def create
+    @agent = User.create(params)
+  end
+
   private
   def set_layout
     @layout = current_user.role == "admin" ? "admin" : "agent"
+  end
+
+  def agent_params
+    
   end
 end
