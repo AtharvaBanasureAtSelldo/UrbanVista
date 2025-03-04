@@ -65,6 +65,7 @@ group :test do
 end
 
 gem "pry"
+gem "pg"
 gem "jwt", "~> 2.10"
 
 gem "kaminari", "~> 1.2"

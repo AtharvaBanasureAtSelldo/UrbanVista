@@ -11,13 +11,16 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[8.0].define(version: 2025_02_19_085542) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_catalog.plpgsql"
+
   create_table "appointments", force: :cascade do |t|
     t.date "date"
     t.time "time"
-    t.integer "tenant_id", null: false
-    t.integer "customer_id", null: false
-    t.integer "property_id", null: false
-    t.integer "user_id", null: false
+    t.bigint "tenant_id", null: false
+    t.bigint "customer_id", null: false
+    t.bigint "property_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["customer_id"], name: "index_appointments_on_customer_id"
@@ -29,7 +32,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_19_085542) do
   create_table "customers", force: :cascade do |t|
     t.string "name"
     t.string "phoneno"
-    t.integer "tenant_id", null: false
+    t.bigint "tenant_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["tenant_id"], name: "index_customers_on_tenant_id"
@@ -39,8 +42,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_19_085542) do
     t.string "title"
     t.string "address"
     t.integer "price"
-    t.integer "tenant_id", null: false
-    t.integer "user_id", null: false
+    t.bigint "tenant_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["tenant_id"], name: "index_properties_on_tenant_id"
@@ -48,8 +51,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_19_085542) do
   end
 
   create_table "property_tags", force: :cascade do |t|
-    t.integer "tag_id", null: false
-    t.integer "property_id", null: false
+    t.bigint "tag_id", null: false
+    t.bigint "property_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["property_id", "tag_id"], name: "index_property_tags_on_property_id_and_tag_id", unique: true
@@ -59,7 +62,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_19_085542) do
 
   create_table "tags", force: :cascade do |t|
     t.string "name"
-    t.integer "tenant_id", null: false
+    t.bigint "tenant_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["tenant_id"], name: "index_tags_on_tenant_id"
@@ -76,7 +79,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_19_085542) do
     t.string "email"
     t.string "role"
     t.string "phone"
-    t.integer "tenant_id", null: false
+    t.bigint "tenant_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "password_digest"

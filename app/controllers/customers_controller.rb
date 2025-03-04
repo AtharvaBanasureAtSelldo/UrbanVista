@@ -18,7 +18,6 @@ class CustomersController < ApplicationController
     else
       render :new
     end
-    render layout: @layout
   end
 
   private

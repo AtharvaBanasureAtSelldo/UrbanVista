@@ -1,24 +1,67 @@
-# README
+<div align="center">
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+![Introduction Banner](/public/banner.png)
+# Urban Vista - Simplifying Real Estate
+</div>
 
-Things you may want to cover:
+## Overview
 
-* Ruby version
+ **Urban Vista** is a SSAS designed for Real State companies.
 
-* System dependencies
+## Tech Stack
 
-* Configuration
+- **🚀 Backend**: Ruby on Rails
+- **🌐 Frontend**: HTML, CSS (Bootstrap), JavaScript.
+- **🗄 Database**: PostgreSQL
+- **🔐 Authentication**:  Custom JWT Based Authentication
+- **🔏 Authorization**: Pundit
 
-* Database creation
+## Schema Design
+![Database Schema](/public/er-diagram.png)
 
-* Database initialization
 
-* How to run the test suite
+## Installation & Setup
+1. Clone the repository:
+   ```sh
+   git clone git@github.com:AtharvaBanasureAtSelldo/UrbanVista.git
+   cd UrbanVista
+   ```
+2. Install dependencies:
+   ```sh
+   bundle install
+   ```
+3. Setup the database:
+   ```sh
+   rails db:migrate
+   ```
+4. Start the server:
+   ```sh
+   rails server
+   ```
+5. Open the application in your browser:
+   ```sh
+   http://localhost:3000
+   ```
 
-* Services (job queues, cache servers, search engines, etc.)
+## Screenshots
 
-* Deployment instructions
-
-* ...
+<div align="center">
+   <table>
+   <tr>
+      <td><img src="/public/1.png" width="400"></td>
+      <td><img src="/public/2.png" width="400"></td>
+   </tr>
+   <tr>
+      <td><img src="/public/3.png" width="400"></td>
+      <td><img src="/public/6.png" width="400"></td>
+   </tr>
+   <tr>
+      <td><img src="/public/7.png" width="400"></td>
+      <td><img src="/public/8.png" width="400"></td>
+   </tr>
+   <tr>
+      <td><img src="/public/5.png" width="400"></td>
+      <td><img src="/public/4.png" width="400"></td>
+   </tr>
+   </table>
+</div>
