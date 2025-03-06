@@ -10,7 +10,7 @@ class PropertyPolicy < ApplicationPolicy
     #   scope.all
     # end
     def resolve
-      if user.is_admin?
+      if user.present? && user.is_admin?
         scope.all # Admins can see all customers
       else
         scope.where(user_id: user.id) # Agents can only see their customers

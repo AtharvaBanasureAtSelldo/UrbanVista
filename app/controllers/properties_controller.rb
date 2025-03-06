@@ -75,7 +75,7 @@ class PropertiesController < ApplicationController
   private
 
   def set_layout
-    @layout = current_user.role == "admin" ? "admin" : "agent"
+    @layout = current_user&.role == "admin" ? "admin" : "agent"
   end
 
   def property_params

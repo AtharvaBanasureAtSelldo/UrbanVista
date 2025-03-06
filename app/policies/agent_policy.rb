@@ -11,7 +11,7 @@ class AgentPolicy < ApplicationPolicy
     #   scope.all
     # end
     def resolve
-      if user.is_admin?
+      if user.present? && user.is_admin?
         scope.all # Admins can see all customers
       else
         raise Pundit::NotAuthorizedError, "You are not authorized to view this page."
@@ -20,22 +20,22 @@ class AgentPolicy < ApplicationPolicy
   end
 
   def index?
-    user.is_admin?
+    user.present? && user.is_admin?
   end
 
   def show?
-    user.present && (user.is_admin? || record.user_id == user.id)
+    user.present? && (user.is_admin? || record.user_id == user.id)
   end
 
   def create?
-    user.is_admin? 
+    user.present? && user.is_admin? 
   end
 
   def update?
-    user.present && (user.is_admin? || record.user_id == user.id)
+    user.present? && (user.is_admin? || record.user_id == user.id)
   end
 
   def destroy?
-    user.present && (user.is_admin? || record.user_id == user.id)
+    user.present? && (user.is_admin? || record.user_id == user.id)
   end
 end

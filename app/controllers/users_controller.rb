@@ -24,7 +24,7 @@ class UsersController < ApplicationController
       redirect_to login_path, notice: "User created Successfully"
     else
       flash.now[:alert] = "#{@user.errors.full_messages[0]}"
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
   
