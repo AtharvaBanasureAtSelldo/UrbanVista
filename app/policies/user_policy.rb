@@ -40,7 +40,7 @@ class UserPolicy < ApplicationPolicy
   class Scope < ApplicationPolicy::Scope
     def resolve
       if user.is_admin?
-        scope.all
+        scope.where(tenant_id: user.tenant_id) 
       else
         scope.where(role: "agent")
       end

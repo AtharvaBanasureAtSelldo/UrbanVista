@@ -12,7 +12,7 @@ class AgentPolicy < ApplicationPolicy
     # end
     def resolve
       if user.present? && user.is_admin?
-        scope.all # Admins can see all customers
+        scope.where(tenant_id: user.tenant_id)
       else
         raise Pundit::NotAuthorizedError, "You are not authorized to view this page."
       end

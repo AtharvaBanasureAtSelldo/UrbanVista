@@ -2,7 +2,7 @@ class AppointmentPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       if user.is_admin?
-        scope.all
+        scope.where(tenant_id: user.tenant_id) 
       else
         scope.where(user_id: user.id).or(scope.where(customer_id: user.id))
       end

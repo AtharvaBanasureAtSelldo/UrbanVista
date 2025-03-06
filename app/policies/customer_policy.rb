@@ -12,9 +12,9 @@ class CustomerPolicy < ApplicationPolicy
     # end
     def resolve
       if user.is_admin?
-        scope.all # Admins can see all customers
+        scope.where(tenant_id: user.tenant_id) 
       else
-        scope.where(user_id: user.id) # Agents can only see their customers
+        scope.where(tenant_id: user.tenant_id) # Agents can only see their customers
       end
     end
   end

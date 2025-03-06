@@ -1,8 +1,8 @@
 class CustomersController < ApplicationController
   before_action :set_layout
   def index
-    # @customers = Customer.where(tenant_id: current_user.id)
-    @customers = Customer.all
+    @customers = policy_scope(Customer).order(created_at: :desc)
+    authorize Customer
     @curtomer_count = @customers.count
     render layout: @layout
   end

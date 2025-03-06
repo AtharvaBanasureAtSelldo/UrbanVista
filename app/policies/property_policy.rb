@@ -13,7 +13,7 @@ class PropertyPolicy < ApplicationPolicy
       return scope.none unless user.present?
 
       if user.present? && user.is_admin?
-        scope.all # Admins can see all customers
+        scope.where(tenant_id: user.tenant_id) # Admins can see all customers
       else
         scope.where(user_id: user.id) # Agents can only see their customers
       end
