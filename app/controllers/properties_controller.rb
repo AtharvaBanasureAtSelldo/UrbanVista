@@ -1,5 +1,5 @@
 class PropertiesController < ApplicationController
-  before_action :authorize_request, only: [ :show ]
+  before_action :authorize_request, only: [ :show, :index ]
   before_action :set_layout
 
   def index

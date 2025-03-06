@@ -1,0 +1,38 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <h1 class="text-center mb-4 text-success">Reset Password</h1>
+
+      <%= form_for @user, url: password_reset_path(params[:id]), html: { class: "border p-4 rounded shadow-sm bg-light" } do |f| %>
+        <% if @user.errors.any? %>
+          <div class="alert alert-danger">
+            <h5 class="fw-semibold">Form is invalid</h5>
+            <ul class="mb-0">
+              <% @user.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="form-group mb-3">
+          <%= f.label :password, "New Password", class: "form-label text-success" %>
+          <%= f.password_field :password, class: "form-control border-success", placeholder: "Enter new password", required: true %>
+        </div>
+
+        <div class="form-group mb-3">
+          <%= f.label :password_confirmation, "Confirm Password", class: "form-label text-success" %>
+          <%= f.password_field :password_confirmation, class: "form-control border-success", placeholder: "Confirm new password", required: true %>
+        </div>
+
+        <div class="d-grid">
+          <%= f.submit "Update Password", class: "btn btn-success btn-block" %>
+        </div>
+      <% end %>
+
+      <p class="text-center mt-3">
+        Remembered your password? <%= link_to 'Login', login_path, class: "text-success fw-bold" %>
+      </p>
+    </div>
+  </div>
+</div>

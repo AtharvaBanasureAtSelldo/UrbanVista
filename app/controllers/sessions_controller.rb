@@ -21,6 +21,7 @@ class SessionsController < ApplicationController
       }
       redirect_to root_path, notice: "Welcome back, #{user.name}!"
     else
+      flash[:alert] = "Invalid Email or Password"
       render :new, alert: "Invalid Email or Password", status: :unprocessable_entity
     end
   end

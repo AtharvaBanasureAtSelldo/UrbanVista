@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :user, class: 'User' do
+  factory :user do
     tenant { FactoryBot.create(:tenant) }
     name { "Atharva Banasure" }
     email { "atharvabanasure@gmail.com" }

@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create]
   resources :agents
   resources :appointments
+  resources :password_resets
+
 
 
 
