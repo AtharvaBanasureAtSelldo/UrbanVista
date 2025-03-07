@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :property do
-    user { FactoryBot.create(:user1, tenant: tenant) }
+    tenant { FactoryBot.create(:tenant) }
+    user { FactoryBot.create(:user, tenant: tenant) }
     title { "Test Property 1" }
     address { "Test Pune" }
     price { 10000000 }
-    association :tenant
   end
 end

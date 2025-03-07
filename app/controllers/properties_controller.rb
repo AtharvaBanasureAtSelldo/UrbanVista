@@ -1,7 +1,6 @@
 class PropertiesController < ApplicationController
   before_action :authorize_request, only: [ :show, :index ]
   before_action :set_layout
-
   def index
     @properties = policy_scope(Property).order(created_at: :desc)
     authorize Property
@@ -50,7 +49,6 @@ class PropertiesController < ApplicationController
     @property = Property.find(params[:id])
     @tags = Tag.all
     authorize @property
-
     render layout: @layout
   rescue ActiveRecord::RecordNotFound
     redirect_to properties_path, alert: "Property not found"
