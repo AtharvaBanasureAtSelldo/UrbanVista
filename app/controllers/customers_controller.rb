@@ -9,12 +9,12 @@ class CustomersController < ApplicationController
 
   def new
     @customer = Customer.new
-  render layout: @layout
+    render layout: @layout
   end
 
   def create
-    @customer = Customer.new(customer_params)
-    if @customer.save
+    result = CustomersService.new(Customer).create_customer(customer_params)
+    if result[:success]
       redirect_to customers_path
     else
       render :new

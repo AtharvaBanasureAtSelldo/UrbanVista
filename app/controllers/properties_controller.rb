@@ -1,16 +1,18 @@
 class PropertiesController < ApplicationController
   before_action :authorize_request, only: [ :show, :index ]
+  before_action :authenticate_user
   before_action :set_layout
   def index
-    @properties = policy_scope(Property).order(created_at: :desc)
+    @properties = policy_scope(PropertiesService.list_all_properties(current_user))
     authorize Property
-    @property_count = @properties.count
-    @agent_count = User.where(role: "agent").count
+    stats = PropertiesService.property_statistics
+    @property_count = stats[:property_count]
+    @agent_count = stats[:agent_count]
     render layout: @layout
   end
 
   def destroy
-    @property = Property.find(params[:id])
+    @property = PropertiesService.fetch_property(params[:id])
     authorize @property
     # TODO : Fix any foreign key constraints dependency
     @property.appointments.destroy_all
@@ -21,11 +23,14 @@ class PropertiesController < ApplicationController
   end
 
   def show
-    @property = Property.find(params[:id])
-    authorize @property
-    render layout: @layout
-  rescue ActiveRecord::RecordNotFound
-    redirect_to properties_path, alert: "Property not found"
+    begin
+      # @property = Property.find(params[:id])
+      @property = PropertiesService.fetch_property(params[:id])
+      authorize @property # independent of the service
+      render layout: @layout #independent of the service
+    rescue ActiveRecord::RecordNotFound
+      redirect_to properties_path, alert: "Property not found"
+    end
   end
 
   def new
@@ -46,7 +51,7 @@ class PropertiesController < ApplicationController
   end
 
   def edit
-    @property = Property.find(params[:id])
+    @property = PropertiesService.fetch_property(params[:id])
     @tags = Tag.all
     authorize @property
     render layout: @layout
@@ -55,7 +60,7 @@ class PropertiesController < ApplicationController
   end
 
   def update
-    @property = Property.find(params[:id])
+    @property = PropertiesService.fetch_property(params[:id])
     authorize @property
     if @property.update(property_params)
       redirect_to properties_path, notice: "Property updated Successfully"

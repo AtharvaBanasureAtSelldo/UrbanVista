@@ -76,3 +76,11 @@ group :development, :test do
   gem "rspec-rails"
 end
 gem "factory_bot_rails", "~> 6.4"
+
+gem 'webpacker', '~> 5.0'
+
+gem 'faker', '~> 3.4', '>= 3.4.2'
+
+group :test do
+  gem 'simplecov', require: false
+end

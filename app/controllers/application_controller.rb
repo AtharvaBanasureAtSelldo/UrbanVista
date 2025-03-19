@@ -52,6 +52,16 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def authenticate_user
+    @current_user = current_user
+    if @current_user.nil?
+      respond_to do |format|
+        format.html { redirect_to login_path, alert: "Please log in first" }
+        format.json { render json: { error: "Unauthorized. Please log in." }, status: :unauthorized }
+      end
+    end
+  end
+
   private
   def user_not_authorized
     flash[:alert] = "You are not authorized to perform this action."

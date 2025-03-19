@@ -1,19 +1,23 @@
 class AppointmentsController < ApplicationController
-  before_action :set_appointment, only: [:show, :edit, :update, :destroy]
   before_action :authorize_request
   before_action :set_layout
   before_action :set_customers_and_agents, only: [:new, :edit]
 
   def index
-    @appointments = policy_scope(Appointment).order(date: :desc)
-    authorize Appointment
-    render layout: @layout
+    begin
+      @appointments = policy_scope(Appointment).order(date: :desc)
+      authorize Appointment
+      render layout: @layout
+    rescue ActiveRecord::RecordNotFound
+      redirect_to appointments_path, alert: "Appointments not found"
+    end
   end
 
   def show
+    @appointment = Appointment.find(params[:id])
     authorize @appointment
     render layout: @layout
-    rescue ActiveRecord::RecordNotFound
+  rescue ActiveRecord::RecordNotFound
     redirect_to appointments_path, alert: "Appointment not found"
   end
 
@@ -36,13 +40,15 @@ class AppointmentsController < ApplicationController
   end
 
   def edit
+    @appointment = Appointment.find(params[:id])
     authorize @appointment
     render layout: @layout
-    rescue ActiveRecord::RecordNotFound
+  rescue ActiveRecord::RecordNotFound
     redirect_to appointments_path, alert: "Appointment not found"
   end
 
   def update
+    @appointment = Appointment.find(params[:id])
     authorize @appointment
     if @appointment.update(appointment_params)
       redirect_to appointments_path, notice: "Appointment updated successfully"
@@ -55,6 +61,7 @@ class AppointmentsController < ApplicationController
   end
 
   def destroy
+    @appointment = Appointment.find(params[:id])
     authorize @appointment
     @appointment.destroy
     redirect_to appointments_path, notice: "Appointment deleted successfully"
