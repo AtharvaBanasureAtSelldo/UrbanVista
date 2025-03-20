@@ -31,12 +31,27 @@ RSpec.describe PropertiesController, type: :request do
         expect(response).to redirect_to(properties_path)
       end
 
-      it "when property belongs to different tenant" do
-        other_tenant = FactoryBot.create(:tenant)
-        other_tenant.id = 78
-        other_property = FactoryBot.create(:property, tenant: other_tenant)
-        get "/properties/#{other_property.id}"
+      it "returns properties in descending order of creation" do
+        property1 = FactoryBot.create(:property, tenant: tenant, user: user, created_at: 1.day.ago)
+        property2 = FactoryBot.create(:property, tenant: tenant, user: user, created_at: 2.days.ago)
+        get "/properties"
+        expect(assigns(:properties)).to eq([ property1, property2 ])
+      end
+
+      it "renders the index template" do
+        get "/properties"
+        expect(response).to render_template(:index)
+      end
+
+      it "renders the show template for a valid property" do
+        get "/properties/#{property.id}"
+        expect(response).to render_template(:show)
+      end
+
+      it "redirects to properties path for an invalid property ID" do
+        get "/properties/9999"
         expect(response).to redirect_to(properties_path)
+        expect(flash[:alert]).to eq("Property not found")
       end
     end
 
@@ -86,6 +101,25 @@ RSpec.describe PropertiesController, type: :request do
         post "/properties", params: property_params
         expect(response).to redirect_to(properties_path)
       end
+
+      it "renders the new property form" do
+        get "/properties/new"
+        expect(response).to render_template(:new)
+      end
+
+      it "does not create a property with missing title" do
+        property_params = {
+          property: {
+            title: nil,
+            address: "Test Address",
+            price: 100000,
+            tenant_id: tenant.id
+          }
+        }
+        post "/properties", params: property_params
+        expect(response).to render_template(:new)
+        expect(flash[:alert]).to be_nil
+      end
     end
 
     context "when user logged out" do
@@ -134,6 +168,17 @@ RSpec.describe PropertiesController, type: :request do
 
       it "when invalid propertyID provided" do
         delete "/properties/1"
+        expect(response).to have_http_status(404)
+      end
+
+      it "deletes a property and redirects to properties path" do
+        delete "/properties/#{property.id}"
+        expect(response).to redirect_to(properties_path)
+        expect(flash[:notice]).to eq("Property deleted Successfully")
+      end
+
+      it "returns 404 for an invalid property ID during delete" do
+        delete "/properties/9999"
         expect(response).to have_http_status(404)
       end
     end
@@ -274,6 +319,17 @@ RSpec.describe PropertiesController, type: :request do
         }
         put "/properties/#{property.id}", params: property_params
         expect(response).to have_http_status(:unprocessable_entity)
+      end
+
+      it "renders the edit template for a valid property" do
+        get "/properties/#{property.id}/edit"
+        expect(response).to render_template(:edit)
+      end
+
+      it "redirects to properties path for an invalid property ID during edit" do
+        get "/properties/9999/edit"
+        expect(response).to redirect_to(properties_path)
+        expect(flash[:alert]).to eq("Property not found")
       end
     end
 

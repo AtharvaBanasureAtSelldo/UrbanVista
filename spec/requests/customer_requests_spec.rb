@@ -47,4 +47,3 @@ RSpec.describe CustomersController, type: :request do
     end
   end
 end
-
