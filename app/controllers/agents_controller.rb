@@ -8,12 +8,10 @@ class AgentsController < ApplicationController
   end
 
   def new
-    @agent = User.where(role: "agent")
     render layout: @layout
   end
 
   def create
-    @agent = User.create(params)
   end
 
   private
