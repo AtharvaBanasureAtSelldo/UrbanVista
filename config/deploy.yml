@@ -2,8 +2,8 @@
 service: urban_vista
 
 # Name of the container image.
-image: your-user/urban_vista
-
+image: atharvabanasureselldo/urban_vista
+ 
 # Deploy to these servers.
 servers:
   web:
