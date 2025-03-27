@@ -1,12 +1,12 @@
 databases:
-  - name: mysite
-    databaseName: mysite
-    user: mysite
+  - name: urbanvista-postgres
+    databaseName: urbanvista_postgres
+    user: urbanvista_postgres_user
     plan: free
 
 services:
   - type: web
-    name: mysite
+    name: urbanvista-postgres
     runtime: ruby
     plan: free
     buildCommand: "./bin/render-build.sh"
@@ -15,7 +15,7 @@ services:
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: mysite
+          name: urbanvista-postgres
           property: connectionString
       - key: RAILS_MASTER_KEY
         sync: false
