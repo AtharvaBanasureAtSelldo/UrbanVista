@@ -36,7 +36,7 @@
                   { prompt: "Select your tenant" }, 
                   { class: "form-select", required: true} %>
             </div>
-            <div class="mb-3">
+            <!-- <div class="mb-3">
               <%= f.label :tags, "Select Tags", class: "form-label" %>
               <div class="tags-container">
                 <% Tag.all.each do |tag| %>
@@ -47,7 +47,7 @@
                 <% end %>
               </div>
               <div id="tag-error" class="text-danger d-none">Please select at least one tag.</div>
-            </div>
+            </div> -->
             <div class="text-end">
               <%= f.submit "Save Property", class: "btn btn-success px-5" %>
             </div>
